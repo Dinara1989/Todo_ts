@@ -25,7 +25,7 @@ export function Todolist(props: PropsType) {
             </div>
             <ul>
                 {
-                    props.tasks.map((t)=>{
+                    props.tasks.map((t)=>{//перезаписали через map
                         return (
                             <li>
                                 <input type="checkbox" checked={t.isDone}/>

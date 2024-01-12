@@ -19,11 +19,11 @@ function App() {
     //         { id: 3, title: "Rushdi", isDone: false }
     // ]
 
-    useState(tasks);
+    // useState(tasks);
 
     function deleteTask (id:number){
             tasks = tasks.filter( t =>  t.id !== id)
-        }
+        }//тому що функція верне true або false, можна не розписувати багато
 
       return (
         <div className="App">
