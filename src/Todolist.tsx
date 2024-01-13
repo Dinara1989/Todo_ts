@@ -1,6 +1,7 @@
 import React from 'react';
-import {Simulate} from "react-dom/test-utils";
-import input = Simulate.input;
+import {FilterValuesType} from "./App";
+
+
 
 export type TaskType = {
     id: number
@@ -11,7 +12,8 @@ export type TaskType = {
 type PropsType = {
         title: string
         tasks: Array<TaskType> //коли вказуємо масив, можна ще позначитти так TaskType[]
-        deleteTask: Function
+        deleteTask: (id: number) => void
+        changeFilter: (value: FilterValuesType) => void
 }
 
 export function Todolist(props: PropsType) {
@@ -37,9 +39,9 @@ export function Todolist(props: PropsType) {
                 }
 
             </ul>
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
+            <button onClick={ ()=> {props.changeFilter("all")}}>All</button>
+            <button onClick={ ()=> {props.changeFilter("completed")}}>Active</button>
+            <button onClick={ ()=> {props.changeFilter("active")}}>Completed</button>
         </div>
     )
 }
