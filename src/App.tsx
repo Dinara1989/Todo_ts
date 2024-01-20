@@ -2,33 +2,33 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import Counter from "./components/Counter";
+import { v1 } from 'uuid';
+
 
 export type FilterValuesType = "all" | "completed" | "active";
 function App() {
 
-    // let tasks2: Array<TaskType> = [
-    //         { id: 1, title: "Harry Potter", isDone: true },
-    //         { id: 2, title: "P & P", isDone: true },
-    //         { id: 3, title: "Rushdi", isDone: false }
-    // ]
-
-    //Розжовано
-    // let arr = useState(initTasks);
-    // let tasks = arr[0];
-    // let setTasks = arr[1];
-    //теж саме, тільи коротко
     let [tasks, setTasks] = useState<Array<TaskType>>([
-        { id: 1, title: "CSS", isDone: true },
-        { id: 2, title: "JS", isDone: false },
-        { id: 3, title: "React", isDone: true },
-        { id: 4, title: "CSS", isDone: true },
-        { id: 5, title: "JS", isDone: false },
-        { id: 6, title: "React", isDone: true }
+        { id: v1(), title: "CSS", isDone: true },
+        { id: v1(), title: "JS", isDone: false },
+        { id: v1(), title: "React", isDone: true },
+        { id: v1(), title: "CSS", isDone: true },
+        { id: v1(), title: "JS", isDone: false },
+        { id: v1(), title: "React", isDone: true }
     ]);
     let [filter, setFilter] = useState<FilterValuesType>("all");
-    function deleteTask (id:number){
+    function deleteTask (id:string){
         let filteredTasks = tasks.filter( t =>  t.id !== id)//тому що функція верне true або false, можна не розписувати багато
         setTasks(filteredTasks);
+    }
+    function addTask (title:string) {
+        let newTask: TaskType = {
+            id: v1(),
+            title: title,
+            isDone: false
+        };
+        let newTasks = [newTask, ...tasks];
+        setTasks(newTasks);
     }
     let tasksForTodolist = tasks;
     if (filter === "completed") {
@@ -49,9 +49,9 @@ function App() {
                 tasks = {tasksForTodolist}
                 deleteTask={deleteTask}
                 changeFilter={changeFilter}
+                addTask={addTask}
             />
             <Counter />
-            {/*<Todolist title = "What to read" tasks = {tasks2} />*/}
 
         </div>
     );
